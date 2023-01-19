@@ -1,0 +1,9 @@
+{
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"prettier.useEditorConfig": false,
+	"prettier.configPath": ".prettierrc.cjs",
+	"prettier.documentSelectors": ["**/*.{cjs,mjs,ts,tsx,json,yaml,yml}"]
+}

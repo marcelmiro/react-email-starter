@@ -1,0 +1,44 @@
+{
+	"name": "emails",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "email dev",
+		"export": "email export",
+		"lint": "tsc --noEmit",
+		"ses-list-templates": "tsx ./scripts/ses-list-templates",
+		"ses-get-template": "tsx ./scripts/ses-get-template",
+		"ses-create-template": "tsx ./scripts/ses-create-template",
+		"ses-update-template": "tsx ./scripts/ses-update-template",
+		"ses-delete-template": "tsx ./scripts/ses-delete-template",
+		"ses-send-template": "tsx ./scripts/ses-send-template",
+		"ses-send-email": "tsx ./scripts/ses-send-email"
+	},
+	"dependencies": {
+		"@aws-sdk/client-ses": "^3.252.0",
+		"@minify-html/node": "^0.10.7",
+		"@react-email/button": "^0.0.5",
+		"@react-email/container": "^0.0.5",
+		"@react-email/head": "^0.0.3",
+		"@react-email/heading": "^0.0.6",
+		"@react-email/hr": "^0.0.3",
+		"@react-email/html": "^0.0.3",
+		"@react-email/img": "^0.0.3",
+		"@react-email/link": "^0.0.3",
+		"@react-email/preview": "^0.0.4",
+		"@react-email/section": "^0.0.4",
+		"@react-email/text": "^0.0.3",
+		"dotenv": "^16.0.3",
+		"open": "^8.4.0",
+		"react-email": "^1.7.2"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.27",
+		"prettier": "^2.8.3",
+		"tsx": "^3.12.2",
+		"typescript": "^4.9.4"
+	},
+	"engines": {
+		"npm": "please-use-yarn"
+	}
+}

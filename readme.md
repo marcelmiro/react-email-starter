@@ -1,0 +1,31 @@
+Integrate [react-email](https://react.email/) with [AWS SES](https://aws.amazon.com/ses/). Deploy emails straight from React to AWS SES from CLI.
+
+---
+
+# React Email Starter
+
+A live preview right in your browser so you don't need to keep sending real emails during development.
+
+## Getting Started
+
+First, install the dependencies:
+
+```sh
+npm install
+# or
+yarn
+```
+
+Then, run the development server:
+
+```sh
+npm run dev
+# or
+yarn dev
+```
+
+Open [localhost:3001](http://localhost:3001) with your browser to see the result.
+
+## License
+
+MIT License

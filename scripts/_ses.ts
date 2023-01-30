@@ -63,11 +63,11 @@ export async function createTemplate({
 	)
 }
 
-export interface UpdateTemplateOptions {
+interface UpdateTemplateOptions {
 	name: string
-	subject?: string
-	html?: string
-	text?: string
+	subject: string
+	html: string
+	text: string
 }
 
 export async function updateTemplate({

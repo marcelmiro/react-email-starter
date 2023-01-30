@@ -1,6 +1,6 @@
 import { parseArgs } from 'node:util'
 
-import { updateTemplate, type UpdateTemplateOptions } from './_ses'
+import { updateTemplate } from './_ses'
 import { renderEmail } from '../utils'
 
 const {
@@ -15,19 +15,12 @@ const {
 })
 
 async function main() {
-	if (!templateName || (!subject && !email)) {
+	if (!templateName || !subject || !email) {
 		throw new Error('Template, subject or email argument missing')
 	}
 
-	const data: UpdateTemplateOptions = { name: templateName, subject }
-
-	if (email) {
-		const { html, text } = await renderEmail(email)
-		data.html = html
-		data.text = text
-	}
-
-	await updateTemplate(data)
+	const { html, text } = await renderEmail(email)
+	await updateTemplate({ name: templateName, subject, html, text })
 }
 
 main().catch((e) => {

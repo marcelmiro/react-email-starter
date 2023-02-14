@@ -25,12 +25,10 @@ export function parseArgs<T extends z.ZodObject<{ [key: string]: ArgType }>>(
 		if (!argv[i].startsWith('-')) continue
 
 		let arg = argv[i].replace(/^\-{1,2}/g, '')
-		let key: string | undefined = undefined
-		let value: string | undefined = undefined
-		const nextArg = argv[i + 1] as string | undefined
+		const nextArg = argv[i + 1] || undefined
 
 		// Get `key` and `value` (if using `key=value` format)
-		;[key, value] = arg.split(/=(.*)/g).map((val) => val || undefined)
+		let [key, value] = arg.split(/=(.*)/g).map((val) => val || undefined)
 		if (!key) continue
 
 		// Get full arg name if `key` is a short arg

@@ -1,19 +1,14 @@
-import { parseArgs } from 'node:util'
+import { z } from 'zod'
 
+import { parseArgs } from '../utils'
 import { deleteTemplate } from './_ses'
 
-const {
-	values: { template: templateName },
-} = parseArgs({
-	strict: true,
-	options: { template: { type: 'string', short: 't' } },
-})
+const { template: templateName } = parseArgs(
+	z.object({ template: z.string().min(1) }),
+	{ t: 'template' },
+)
 
 async function main() {
-	if (!templateName) {
-		throw new Error('Template argument missing')
-	}
-
 	await deleteTemplate({ name: templateName })
 }
 

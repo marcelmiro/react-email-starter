@@ -1,21 +1,16 @@
-import { parseArgs } from 'node:util'
 import { createServer } from 'http'
 import open from 'open'
+import { z } from 'zod'
 
+import { parseArgs } from '../utils'
 import { getTemplate } from './_ses'
 
-const {
-	values: { template: templateName },
-} = parseArgs({
-	strict: true,
-	options: { template: { type: 'string', short: 't' } },
-})
+const { template: templateName } = parseArgs(
+	z.object({ template: z.string().min(1) }),
+	{ t: 'template' },
+)
 
 async function main() {
-	if (!templateName) {
-		throw new Error('Template argument missing')
-	}
-
 	const template = await getTemplate({ name: templateName })
 
 	if (template.HtmlPart) {

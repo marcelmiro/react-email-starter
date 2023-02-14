@@ -1,31 +1,29 @@
-import { parseArgs } from 'node:util'
+import { z } from 'zod'
 
+import { parseArgs } from '../utils'
 import { sendTemplate } from './_ses'
 
-const {
-	values: { template: templateName, data, recipient, from, reply },
-} = parseArgs({
-	strict: true,
-	options: {
-		template: { type: 'string', short: 't' },
-		data: { type: 'string', short: 'd' },
-		recipient: { type: 'string', short: 'r' },
-		from: { type: 'string', short: 'f' },
-		reply: { type: 'string' },
-	},
-})
+const args = parseArgs(
+	z
+		.object({
+			template: z.string().min(1),
+			recipient: z.string().email(),
+			from: z.string().optional(),
+			reply: z.string().optional(),
+		})
+		.catchall(z.string().min(1)),
+	{ t: 'template', r: 'recipient', f: 'from' },
+)
+
+const { template: templateName, recipient, from, reply, ...templateData } = args
 
 async function main() {
-	if (!templateName || !recipient) {
-		throw new Error('Template or recipient argument missing')
-	}
-
 	await sendTemplate({
 		to: recipient,
 		from,
 		reply,
 		template: templateName,
-		templateData: data ? JSON.parse(data) : undefined,
+		templateData,
 	})
 }
 

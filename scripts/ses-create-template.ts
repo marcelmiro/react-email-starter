@@ -1,24 +1,21 @@
-import { parseArgs } from 'node:util'
+import { z } from 'zod'
 
+import { parseArgs } from '../utils'
 import { createTemplate } from './_ses'
 import { renderEmail } from '../utils'
 
-const {
-	values: { template: templateName, subject, email },
-} = parseArgs({
-	strict: true,
-	options: {
-		template: { type: 'string', short: 't' },
-		subject: { type: 'string', short: 's' },
-		email: { type: 'string', short: 'e' },
-	},
-})
+const args = parseArgs(
+	z.object({
+		template: z.string().min(1),
+		subject: z.string().min(1),
+		email: z.string().min(1),
+	}),
+	{ t: 'template', s: 'subject', e: 'email' },
+)
+
+const { template: templateName, subject, email } = args
 
 async function main() {
-	if (!templateName || !subject || !email) {
-		throw new Error('Template, subject or email argument missing')
-	}
-
 	const { html, text } = await renderEmail(email)
 	await createTemplate({ name: templateName, subject, html, text })
 }

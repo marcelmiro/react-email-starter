@@ -14,17 +14,19 @@ async function main() {
 	const template = await getTemplate({ name: templateName })
 
 	if (template.HtmlPart) {
+		console.log({
+			TemplateName: template.TemplateName,
+			SubjectPart: template.SubjectPart,
+		})
+
 		const server = createServer((_req, res) => {
 			res.writeHead(200, { 'Content-Type': 'text/html' })
 			res.write(template.HtmlPart)
 			res.end()
 		}).listen(8080)
-
 		server.on('request', server.close)
 		open('http://localhost:8080')
-	} else {
-		console.log(template)
-	}
+	} else console.log(template)
 }
 
 main().catch((e) => {

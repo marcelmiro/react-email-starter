@@ -15,29 +15,19 @@
 		"ses-send-email": "tsx ./scripts/ses-send-email"
 	},
 	"dependencies": {
-		"@aws-sdk/client-ses": "^3.267.0",
+		"@aws-sdk/client-ses": "^3.292.0",
 		"@minify-html/node": "^0.10.8",
-		"@react-email/button": "^0.0.6",
-		"@react-email/container": "^0.0.7",
-		"@react-email/head": "^0.0.4",
-		"@react-email/heading": "^0.0.7",
-		"@react-email/hr": "^0.0.4",
-		"@react-email/html": "^0.0.4",
-		"@react-email/img": "^0.0.4",
-		"@react-email/link": "^0.0.4",
-		"@react-email/preview": "^0.0.5",
-		"@react-email/section": "^0.0.8",
-		"@react-email/text": "^0.0.4",
+		"@react-email/components": "^0.0.3",
 		"dotenv": "^16.0.3",
-		"open": "^8.4.1",
-		"react-email": "^1.7.13",
-		"zod": "^3.20.6"
+		"open": "^8.4.2",
+		"react-email": "^1.7.15",
+		"zod": "^3.21.4"
 	},
 	"devDependencies": {
-		"@types/node": "^18.13.0",
+		"@types/node": "^18.15.3",
 		"@types/react": "^18.0.28",
 		"prettier": "^2.8.4",
-		"tsx": "^3.12.3",
+		"tsx": "^3.12.5",
 		"typescript": "^4.9.5"
 	},
 	"engines": {

@@ -5,15 +5,15 @@ import { z } from 'zod'
 import { parseArgs } from '../utils'
 import { getTemplate } from './_ses'
 
-const { template: templateName } = parseArgs(
-	z.object({ template: z.string().min(1) }),
-	{ t: 'template' },
+const { template: templateName, view: viewEmail } = parseArgs(
+	z.object({ template: z.string().min(1), view: z.boolean().default(true) }),
+	{ t: 'template', v: 'view' },
 )
 
 async function main() {
 	const template = await getTemplate({ name: templateName })
 
-	if (template.HtmlPart) {
+	if (viewEmail && template.HtmlPart) {
 		console.log({
 			TemplateName: template.TemplateName,
 			SubjectPart: template.SubjectPart,
@@ -25,7 +25,7 @@ async function main() {
 			res.end()
 		}).listen(8080)
 		server.on('request', server.close)
-		open('http://localhost:8080')
+		open('http://127.0.0.1:8080')
 	} else console.log(template)
 }
 

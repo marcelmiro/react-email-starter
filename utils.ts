@@ -3,7 +3,10 @@ import { minify } from '@minify-html/node'
 import { z } from 'zod'
 
 type ArgPrimitiveType = z.ZodString | z.ZodBoolean
-type ArgType = ArgPrimitiveType | z.ZodOptional<ArgPrimitiveType>
+type ArgType =
+	| ArgPrimitiveType
+	| z.ZodOptional<ArgPrimitiveType>
+	| z.ZodDefault<ArgPrimitiveType>
 type ArgSchema = z.ZodObject<{ [key: string]: ArgType }>
 
 type RemoveIndexSignature<T> = {
@@ -50,7 +53,8 @@ export function parseArgs<T extends ArgSchema | z.ZodEffects<ArgSchema>>(
 		const zodType = schemaDef.shape()[key] || schemaDef.catchall
 
 		const typeName =
-			zodType._def.typeName === 'ZodOptional'
+			zodType._def.typeName === 'ZodOptional' ||
+			zodType._def.typeName === 'ZodDefault'
 				? zodType._def.innerType._def.typeName
 				: zodType._def.typeName
 

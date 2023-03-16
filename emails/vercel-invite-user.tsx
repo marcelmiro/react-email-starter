@@ -1,201 +1,152 @@
-import { Button } from '@react-email/button'
-import { Container } from '@react-email/container'
-import { Head } from '@react-email/head'
-import { Hr } from '@react-email/hr'
-import { Html } from '@react-email/html'
-import { Img } from '@react-email/img'
-import { Link } from '@react-email/link'
-import { Preview } from '@react-email/preview'
-import { Section } from '@react-email/section'
-import { Text } from '@react-email/text'
+import {
+	Body,
+	Button,
+	Column,
+	Container,
+	Head,
+	Heading,
+	Hr,
+	Html,
+	Img,
+	Link,
+	Preview,
+	Row,
+	Section,
+	Tailwind,
+	Text,
+} from '@react-email/components'
 import * as React from 'react'
 
-export default function Email() {
+interface VercelInviteUserEmailProps {
+	username?: string
+	userImage?: string
+	invitedByUsername?: string
+	invitedByEmail?: string
+	teamName?: string
+	teamImage?: string
+	inviteLink?: string
+	inviteFromIp?: string
+	inviteFromLocation?: string
+}
+
+const baseUrl = process.env.VERCEL_URL
+	? `https://${process.env.VERCEL_URL}`
+	: ''
+
+export const VercelInviteUserEmail = ({
+	username = 'zenorocha',
+	userImage = `${baseUrl}/static/vercel-user.png`,
+	invitedByUsername = 'bukinoshita',
+	invitedByEmail = 'bukinoshita@example.com',
+	teamName = 'My Project',
+	teamImage = `${baseUrl}/static/vercel-team.png`,
+	inviteLink = 'https://vercel.com/teams/invite/foo',
+	inviteFromIp = '204.13.186.218',
+	inviteFromLocation = 'São Paulo, Brazil',
+}: VercelInviteUserEmailProps) => {
+	const previewText = `Join ${invitedByUsername} on Vercel`
+
 	return (
 		<Html>
 			<Head />
-			<Preview>Join bukinoshita on Vercel</Preview>
-			<Section style={main}>
-				<Container style={container}>
-					<Section style={{ marginTop: '32px' }}>
-						<Img
-							src="/static/vercel-logo.png"
-							width="40"
-							height="37"
-							alt="Vercel"
-							style={logo}
-						/>
-					</Section>
-					<Text style={h1}>
-						Join <strong>My Project</strong> on{' '}
-						<strong>Vercel</strong>
-					</Text>
-					<Text style={text}>Hello zenorocha,</Text>
-					<Text style={text}>
-						<strong>bukinoshita</strong> (
-						<Link
-							href="mailto:bukinoshita@example.com"
-							style={link}
-						>
-							bukinoshita@example.com
-						</Link>
-						) has invited you to the <strong>My Project</strong>{' '}
-						team on <strong>Vercel</strong>.
-					</Text>
-					<table
-						style={spacing}
-						border={0}
-						cellPadding="0"
-						cellSpacing="10"
-						align="center"
-					>
-						<tr>
-							<td style={center} align="left" valign="middle">
-								<Img
-									style={avatar}
-									src="https://vercel.com/api/www/avatar/?u=zenorocha&amp;s=240&amp;format=png"
-									width="64"
-									height="64"
-								/>
-							</td>
-							<td style={center} align="left" valign="middle">
-								<Img
-									src="/static/vercel-arrow.png"
-									width="12"
-									height="9"
-									alt="invited you to"
-								/>
-							</td>
-							<td style={center} align="left" valign="middle">
-								<Img
-									style={avatar}
-									src="https://vercel.com/api/www/avatar/?teamId=team_3e17ZatpKJ1imLQdTyrLeBoX&amp;s=240&amp;format=png"
-									width="64"
-									height="64"
-								/>
-							</td>
-						</tr>
-					</table>
-					<Section style={{ textAlign: 'center' }}>
-						<Button
-							pX={20}
-							pY={12}
-							style={btn}
-							href="https://vercel.com/teams/invite/foo"
-						>
-							Join the team
-						</Button>
-					</Section>
-					<Text style={text}>
-						<br />
-						or copy and paste this URL into your browser:{' '}
-						<Link
-							href="https://vercel.com/teams/invite/foo"
-							target="_blank"
-							style={link}
-							rel="noreferrer"
-						>
-							https://vercel.com/teams/invite/foo
-						</Link>
-					</Text>
-					<Hr style={hr} />
-					<Text style={footer}>
-						This invitation was intended for{' '}
-						<span style={black}>zenorocha</span>.This invite was
-						sent from <span style={black}>204.13.186.218</span>{' '}
-						located in <span style={black}>São Paulo, Brazil</span>.
-						If you were not expecting this invitation, you can
-						ignore this email. If you are concerned about your
-						account's safety, please reply to this email to get in
-						touch with us.
-					</Text>
-				</Container>
-			</Section>
+			<Preview>{previewText}</Preview>
+			<Tailwind>
+				<Body className="bg-white my-auto mx-auto font-sans">
+					<Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
+						<Section className="mt-[32px]">
+							<Img
+								src={`${baseUrl}/static/vercel-logo.png`}
+								width="40"
+								height="37"
+								alt="Vercel"
+								className="my-0 mx-auto"
+							/>
+						</Section>
+						<Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
+							Join <strong>{teamName}</strong> on{' '}
+							<strong>Vercel</strong>
+						</Heading>
+						<Text className="text-black text-[14px] leading-[24px]">
+							Hello {username},
+						</Text>
+						<Text className="text-black text-[14px] leading-[24px]">
+							<strong>bukinoshita</strong> (
+							<Link
+								href={`mailto:${invitedByEmail}`}
+								className="text-blue-600 no-underline"
+							>
+								{invitedByEmail}
+							</Link>
+							) has invited you to the <strong>{teamName}</strong>{' '}
+							team on <strong>Vercel</strong>.
+						</Text>
+						<Section>
+							<Row>
+								<Column align="right">
+									<Img
+										className="rounded-full"
+										src={userImage}
+										width="64"
+										height="64"
+									/>
+								</Column>
+								<Column align="center">
+									<Img
+										src={`${baseUrl}/static/vercel-arrow.png`}
+										width="12"
+										height="9"
+										alt="invited you to"
+									/>
+								</Column>
+								<Column align="left">
+									<Img
+										className="rounded-full"
+										src={teamImage}
+										width="64"
+										height="64"
+									/>
+								</Column>
+							</Row>
+						</Section>
+						<Section className="text-center mt-[32px] mb-[32px]">
+							<Button
+								pX={20}
+								pY={12}
+								className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
+								href={inviteLink}
+							>
+								Join the team
+							</Button>
+						</Section>
+						<Text className="text-black text-[14px] leading-[24px]">
+							or copy and paste this URL into your browser:{' '}
+							<Link
+								href={inviteLink}
+								className="text-blue-600 no-underline"
+							>
+								{inviteLink}
+							</Link>
+						</Text>
+						<Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
+						<Text className="text-[#666666] text-[12px] leading-[24px]">
+							This invitation was intended for{' '}
+							<span className="text-black">{username} </span>.This
+							invite was sent from{' '}
+							<span className="text-black">{inviteFromIp}</span>{' '}
+							located in{' '}
+							<span className="text-black">
+								{inviteFromLocation}
+							</span>
+							. If you were not expecting this invitation, you can
+							ignore this email. If you are concerned about your
+							account's safety, please reply to this email to get
+							in touch with us.
+						</Text>
+					</Container>
+				</Body>
+			</Tailwind>
 		</Html>
 	)
 }
 
-const main = {
-	backgroundColor: '#ffffff',
-	margin: '0 auto',
-}
-
-const container = {
-	border: '1px solid #eaeaea',
-	borderRadius: '5px',
-	margin: '40px auto',
-	padding: '20px',
-	width: '465px',
-}
-
-const logo = {
-	margin: '0 auto',
-}
-
-const h1 = {
-	color: '#000',
-	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-	fontSize: '24px',
-	fontWeight: 'normal',
-	textAlign: 'center' as const,
-	margin: '30px 0',
-	padding: '0',
-}
-
-const avatar = {
-	borderRadius: '100%',
-}
-
-const link = {
-	color: '#067df7',
-	textDecoration: 'none',
-}
-
-const text = {
-	color: '#000',
-	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-	fontSize: '14px',
-	lineHeight: '24px',
-}
-
-const black = {
-	color: 'black',
-}
-
-const center = {
-	verticalAlign: 'middle',
-}
-
-const btn = {
-	backgroundColor: '#000',
-	borderRadius: '5px',
-	color: '#fff',
-	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-	fontSize: '12px',
-	fontWeight: 500,
-	lineHeight: '50px',
-	textDecoration: 'none',
-	textAlign: 'center' as const,
-}
-
-const spacing = {
-	marginBottom: '26px',
-}
-
-const hr = {
-	border: 'none',
-	borderTop: '1px solid #eaeaea',
-	margin: '26px 0',
-	width: '100%',
-}
-
-const footer = {
-	color: '#666666',
-	fontFamily:
-		"-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-	fontSize: '12px',
-	lineHeight: '24px',
-}
+export default VercelInviteUserEmail

@@ -76,7 +76,7 @@ export default function Email() {
 							<br />
 							Something wrong?{' '}
 							<Link
-								href="https://airtable.com/shrOoBDSahIZQRcPc"
+								href="https://airtable.com/shrn80ilQpefbmgSn"
 								target="_blank"
 								style={link}
 							>
